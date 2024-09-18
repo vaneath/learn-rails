@@ -1,9 +1,8 @@
-<%= form_with(model: task) do |form| %>
+<%= form_with(model: task, local: true, class: "space-y-6") do |form| %>
   <% if task.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <strong class="font-bold"><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</strong>
+      <ul class="mt-2">
         <% task.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
@@ -12,6 +11,26 @@
   <% end %>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :name, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+
+  <div>
+    <%= form.label :description, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :description, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+
+  <div>
+    <%= form.label :category_id, "Category", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+
+  <div class="flex items-center">
+    <%= form.check_box :is_completed, class: "h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
+    <%= form.label :is_completed, "Completed", class: "ml-2 block text-sm font-medium text-gray-700" %>
+  </div>
+
+  <div>
+    <%= form.submit "Save Task", class: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
   </div>
 <% end %>

@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @category %>
+<div class="container mx-auto px-4 py-8">
+  <div class="bg-white shadow-md rounded-lg p-6">
+    <h1 class="text-3xl font-bold mb-4"><%= @category.name %></h1>
+    <p class="text-gray-700 mb-4"><%= @category.description %></p>
 
-<div>
-  <%= link_to "Edit this category", edit_category_path(@category) %> |
-  <%= link_to "Back to categories", categories_path %>
-
-  <%= button_to "Destroy this category", @category, method: :delete %>
+    <div class="flex justify-between items-center mt-6">
+      <%= link_to "Edit", edit_category_path(@category), class: "bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600" %>
+      <%= link_to "Back to Categories", categories_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+      <%= button_to "Destroy this category", @category, method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" %>
+    </div>
+  </div>
 </div>

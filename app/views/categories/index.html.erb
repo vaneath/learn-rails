@@ -1,14 +1,31 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-green-500"><%= notice %></p>
 
-<h1>Categories</h1>
+<div class="container mx-auto px-4">
+  <div class="flex justify-between items-center mb-4">
+    <h1 class="text-2xl font-bold">Categories</h1>
+    <%= link_to "New category", new_category_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+  </div>
 
-<div id="categories">
-  <% @categories.each do |category| %>
-    <%= render category %>
-    <p>
-      <%= link_to "Show this category", category %>
-    </p>
-  <% end %>
+  <div id="categories" class="overflow-x-auto">
+    <table class="min-w-full bg-white border border-gray-200">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-2 border-b text-left">Name</th>
+          <th class="px-4 py-2 border-b text-left">Description</th>
+          <th class="px-4 py-2 border-b text-left">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @categories.each do |category| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-4 py-2 border-b"><%= category.name %></td>
+            <td class="px-4 py-2 border-b"><%= category.description %></td>
+            <td class="px-4 py-2 border-b">
+              <%= link_to "Show", category, class: "text-blue-500 hover:underline" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-<%= link_to "New category", new_category_path %>
