@@ -12,6 +12,16 @@
   </head>
 
   <body>
+    <nav class="bg-gray-800 p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-white text-2xl font-bold">Loy Kob</h1>
+        <div class="flex space-x-4">
+          <%= link_to "Tasks", tasks_path, class: "text-white hover:text-gray-300" %>
+          <%= link_to "Categories", categories_path, class: "text-white hover:text-gray-300" %>
+        </div>
+      </div>
+    </nav>
+
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>
