@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_18_145217) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_05_023825) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_18_145217) do
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", default: 0
     t.index ["category_id"], name: "index_tasks_on_category_id"
   end
 

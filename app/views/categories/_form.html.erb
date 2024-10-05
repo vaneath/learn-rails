@@ -1,8 +1,7 @@
-<%= form_with(model: category, class: "max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md") do |form| %>
+<%= form_with(model: category, class: "max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md space-y-6") do |form| %>
   <% if category.errors.any? %>
     <div class="mb-4 p-4 bg-red-100 text-red-700 rounded">
       <h2 class="text-lg font-semibold"><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
-
       <ul class="mt-2 list-disc list-inside">
         <% category.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -13,15 +12,15 @@
 
   <div class="mb-4">
     <%= form.label :name, class: "block text-gray-700 font-medium mb-2" %>
-    <%= form.text_field :name, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <%= form.text_field :name, class: "w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 
   <div class="mb-4">
     <%= form.label :description, class: "block text-gray-700 font-medium mb-2" %>
-    <%= form.text_area :description, class: "w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+    <%= form.text_area :description, class: "w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 
   <div>
-    <%= form.submit "Save Category", class: "w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600" %>
+    <%= form.submit "Save Category", class: "w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
   </div>
 <% end %>

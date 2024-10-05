@@ -25,6 +25,11 @@
     <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Select a category" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
   </div>
 
+  <div>
+    <%= form.label :status, "Status", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :status, Task.statuses.keys, :to_s, :humanize, { prompt: "Select a status" }, class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+  </div>
+
   <div class="flex items-center">
     <%= form.check_box :is_completed, class: "h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" %>
     <%= form.label :is_completed, "Completed", class: "ml-2 block text-sm font-medium text-gray-700" %>

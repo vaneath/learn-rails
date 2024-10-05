@@ -4,6 +4,25 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
+
+    if params[:category].present?
+      @tasks = @tasks.where(category_id: params[:category])
+    end
+
+    if params[:status].present?
+      @tasks = @tasks.where(status: params[:status])
+    end
+
+    if params[:sort]
+      sort_params = params[:sort].split(',')
+      sort_params.each do |sort_param|
+        column, direction = sort_param.split(':')
+        @tasks = @tasks.order(column => direction)
+      end
+    end
+
+    @categories = Category.all
+    @statuses = Task.distinct.pluck(:status)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -65,6 +84,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.fetch(:task, {}).permit(:name, :description, :category_id, :is_completed)
+      params.fetch(:task, {}).permit(:name, :description, :category_id, :status, :is_completed)
     end
 end

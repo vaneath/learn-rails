@@ -20,8 +20,9 @@
           <tr class="hover:bg-gray-50">
             <td class="px-4 py-2 border-b"><%= category.name %></td>
             <td class="px-4 py-2 border-b"><%= category.description %></td>
-            <td class="px-4 py-2 border-b">
+            <td class="px-4 py-2 border-b flex gap-3">
               <%= link_to "Show", category, class: "text-blue-500 hover:underline" %>
+              <%= link_to "Edit", edit_category_path(category), class: "text-blue-500 hover:underline" %>
             </td>
           </tr>
         <% end %>

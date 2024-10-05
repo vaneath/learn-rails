@@ -6,14 +6,33 @@
     <%= link_to "New task", new_task_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
   </div>
 
+  <div class="mb-4">
+    <%= form_with url: tasks_path, method: :get, local: true, class: "space-y-4" do %>
+      <div class="flex gap-3">
+        <div>
+          <%= label_tag :category, "Filter by Category", class: "block text-sm font-medium text-gray-700" %>
+          <%= select_tag :category, options_from_collection_for_select(@categories, :id, :name, params[:category]), include_blank: 'All', class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        </div>
+        <div>
+          <%= label_tag :status, "Filter by Status", class: "block text-sm font-medium text-gray-700" %>
+          <%= select_tag :status, options_for_select(@statuses.map { |status| [status.humanize, status] }, params[:status]), include_blank: 'All', class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+        </div>
+        <div class="self-end">
+          <%= submit_tag "Filter", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
   <div id="tasks" class="overflow-x-auto">
     <table class="min-w-full bg-white border border-gray-200">
       <thead>
         <tr class="bg-gray-100">
-          <th class="px-4 py-2 border-b text-left">Name</th>
-          <th class="px-4 py-2 border-b text-left">Description</th>
-          <th class="px-4 py-2 border-b text-left">Category</th>
-          <th class="px-4 py-2 border-b text-left">Completed</th>
+          <th class="px-4 py-2 border-b text-left"><%= sortable "name" %></th>
+          <th class="px-4 py-2 border-b text-left"><%= sortable "description" %></th>
+          <th class="px-4 py-2 border-b text-left"><%= sortable "category_id", "Category" %></th>
+          <th class="px-4 py-2 border-b text-left"><%= sortable "status" %></th>
+          <th class="px-4 py-2 border-b text-left"><%= sortable "created_at", "Created At" %></th>
           <th class="px-4 py-2 border-b text-left">Actions</th>
         </tr>
       </thead>
@@ -23,7 +42,8 @@
             <td class="px-4 py-2 border-b"><%= task.name %></td>
             <td class="px-4 py-2 border-b"><%= task.description %></td>
             <td class="px-4 py-2 border-b"><%= task.category.name %></td>
-            <td class="px-4 py-2 border-b"><%= task.is_completed %></td>
+            <td class="px-4 py-2 border-b text-center"><%= task.status.humanize %></td>
+            <td class="px-4 py-2 border-b"><%= task.created_at.strftime("%B %d, %Y %I:%M %p") %></td>
             <td class="px-4 py-2 border-b">
               <%= link_to "Show", task, class: "text-blue-500 hover:underline" %>
               <%= link_to "Edit", edit_task_path(task), class: "text-blue-500 hover:underline" %>
